@@ -1,6 +1,7 @@
 html5 features
-works in Chrome Canary
 =====
+
+works in Chrome Canary
 
 - Notifications
 - Html templates
