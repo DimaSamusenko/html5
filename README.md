@@ -1,4 +1,5 @@
 html5 features
+works in Chrome Canary
 =====
 
 - Notifications
