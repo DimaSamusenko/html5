@@ -41,10 +41,10 @@ console.info("Call to template() took " + (t1 - t0) + " milliseconds.");
 
 // shadow DOM
 function shadow(id) {
-    var shadow = document.querySelector(id).webkitCreateShadowRoot();
+    var shadow = document.querySelector(id).createShadowRoot();
 
     shadow.innerHTML =
-        '<div style="color:red">Lorem Ipsum!</div>'
+        '<div style="color:red">Hello from Shadow DOM!</div>'
         + '<header><content select="h1"></content></header>'
         + '<section><content select="h2"></content></section>';
 
@@ -74,3 +74,26 @@ function mdvLoop(id) {
 }
 
 mdvLoop('#tplBar');
+
+
+
+// Object.observe && DOM.onChange
+
+(function objObserve() {
+    var proto = Object.create(HTMLElement.prototype, {
+        createdCallback: {
+            value: created
+        }
+    });
+
+    function created() {
+        var t = document.querySelector('#observed');
+        var clone = document.importNode(t.content, true);
+        this.createShadowRoot().appendChild(clone);
+    }
+
+    document.registerElement('x-observed', {
+        prototype: proto
+    });
+
+}());
